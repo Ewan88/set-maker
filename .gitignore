@@ -34,4 +34,4 @@ playwright-report/
 *.pem
 
 # user credentials
-src/utils/credentials.json
+src/credentials.json

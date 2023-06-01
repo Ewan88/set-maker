@@ -1,30 +1,26 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
-import fetchData from './helpers/authHelper'
-import SearchBar from './components/SearchBar.vue'
+	import { defineComponent } from 'vue'
+	import requestUserAuthentication from './helpers/authHelper'
 
-export default defineComponent({
-  data() {
-    return {
-      username: 'bob'
-    }
-  },
-  methods: {
-    fetchData
-  },
-  name: 'App',
-  components: {
-    SearchBar,
-  }
-})
+	export default defineComponent({
+		name: 'App',
+		data() {
+			return {
+				username: 'bob'
+			}
+		},
+		methods: {
+			requestUserAuthentication
+		}
+	})
 </script>
 
 <template>
-  <body>
-    <button @click="fetchData()">login</button>
-  </body>
+	<body>
+		<button @click="requestUserAuthentication()">login</button>
+	</body>
 </template>
 
 <style lang="scss">
-@import "@/assets/styles.scss";
+	@import '@/assets/styles.scss';
 </style>
