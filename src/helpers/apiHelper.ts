@@ -1,8 +1,10 @@
-async function fetchProfile(token: string): Promise<UserProfile> {
-	const result = await fetch('https://api.spotify.com/v1/me', {
-		method: 'GET',
-		headers: { Authorization: `Bearer ${token}` }
-	})
+import axios, { type AxiosResponse } from 'axios';
 
-	return await result.json()
+export async function getUserProfile(token: string): Promise<UserProfile> {
+	const response = await axios.get('https://api.spotify.com/v1/me', {
+		method: 'GET',
+		headers: { Authorization: `Bearer ${token}` },
+	});
+
+	return response.data;
 }
