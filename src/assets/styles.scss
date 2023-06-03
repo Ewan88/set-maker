@@ -3,6 +3,7 @@ body {
 	color: whitesmoke;
 	font-size: large;
 	margin: 0;
+	font-family: sans-serif;
 }
 
 #app {
@@ -29,7 +30,7 @@ button {
 	text-align: center;
 	text-shadow: 1px 1px 1px #000;
 	border-radius: 5rem;
-	background-color: blueviolet;
+	background-color: rgb(138, 43, 226);
 	color: whitesmoke;
 	display: block;
 	margin-left: auto;
@@ -38,8 +39,12 @@ button {
 	margin-bottom: 25%;
 
 	&:hover {
-		background-color: purple;
+		background-color: rgb(118, 33, 216);
 		cursor: pointer;
+	}
+
+	&:active {
+		background-color: rgb(118, 33, 216);
 	}
 }
 
@@ -52,15 +57,23 @@ p {
 	margin-bottom: 25%;
 }
 
-// .playlist-wrapper {
-// 	height: calc(100vh - 2em);
-// 	bottom: 0;
-// 	left: 0;
-// 	padding: 1em;
-// }
+.playlists-wrapper {
+	height: calc(100vh - 2em);
+	bottom: 0;
+	left: 0;
+	padding: 1em 0;
+}
 
-ul {
-	// margin: 0;
-	// padding: 0;
-	// padding-bottom: 1rem;
+.playlist-item-wrapper {
+	display: flex;
+	align-items: center;
+
+	&:hover {
+		background-color: rgb(30, 30, 30);
+		cursor: pointer;
+	}
+
+	&:active {
+		background-color: rgb(45, 45, 45);
+	}
 }

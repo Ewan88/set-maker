@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { defineComponent } from 'vue';
 	import { getUserPlaylists, getPlaylistsFromHref } from '@/helpers/apiHelper';
+	import PlaylistItem from './PlaylistItem.vue';
 
 	export default defineComponent({
 		props: {
@@ -37,14 +38,17 @@
 		mounted() {
 			this.populate();
 		},
+		components: { PlaylistItem },
 	});
 </script>
 
 <template>
-	<div v-if="isLoading"></div>
-	<ul>
-		<li v-for="playlist in playlists" :key="playlist.id">
-			{{ playlist.name }}
-		</li>
-	</ul>
+	<div class="spinner" v-if="isLoading"></div>
+	<div v-if="playlists.length > 0" class="playlists-wrapper">
+		<PlaylistItem
+			v-for="playlist of playlists"
+			:key="playlist.id"
+			:playlist="playlist"
+		/>
+	</div>
 </template>
