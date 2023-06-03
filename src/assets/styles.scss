@@ -2,6 +2,23 @@ body {
 	background-color: black;
 	color: whitesmoke;
 	font-size: large;
+	margin: 0;
+}
+
+#app {
+	min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background: whitesmoke;
 }
 
 button {
@@ -33,4 +50,17 @@ p {
 	margin-right: auto;
 	margin-top: 25%;
 	margin-bottom: 25%;
+}
+
+// .playlist-wrapper {
+// 	height: calc(100vh - 2em);
+// 	bottom: 0;
+// 	left: 0;
+// 	padding: 1em;
+// }
+
+ul {
+	// margin: 0;
+	// padding: 0;
+	// padding-bottom: 1rem;
 }

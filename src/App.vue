@@ -2,6 +2,7 @@
 	import { defineComponent } from 'vue';
 	import { getAuthorizationURL, getAccessToken } from './helpers/authHelper';
 	import { getUserProfile } from './helpers/apiHelper';
+	import PlaylistsWrapper from './components/PlaylistsWrapper.vue';
 
 	export default defineComponent({
 		name: 'App',
@@ -10,6 +11,9 @@
 				accessToken: '',
 				userProfile: null as unknown as UserProfile,
 			};
+		},
+		components: {
+			PlaylistsWrapper: PlaylistsWrapper,
 		},
 		methods: {
 			async login() {
@@ -22,6 +26,11 @@
 				if (code) {
 					this.accessToken = await getAccessToken(code);
 					this.userProfile = await getUserProfile(this.accessToken);
+					window.history.replaceState(
+						{},
+						document.title,
+						window.location.pathname,
+					);
 				}
 			},
 		},
@@ -32,14 +41,11 @@
 </script>
 
 <template>
-	<body>
-		<button v-if="!accessToken" @click="login()">Login via Spotify</button>
-		<div v-else>
-			<p>Welcome, {{ userProfile.display_name }}!</p>
-		</div>
-	</body>
+	<button v-if="!accessToken" @click="login()">Login via Spotify</button>
+	<PlaylistsWrapper v-else :access-token="accessToken"></PlaylistsWrapper>
 </template>
 
 <style lang="scss">
+	@import '@/assets/spinner.scss';
 	@import '@/assets/styles.scss';
 </style>
