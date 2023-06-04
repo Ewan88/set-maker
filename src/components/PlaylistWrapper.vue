@@ -2,6 +2,7 @@
 	import { defineComponent } from 'vue';
 	import { getUserPlaylists, getPlaylistsFromHref } from '@/helpers/apiHelper';
 	import PlaylistItem from './PlaylistItem.vue';
+	import Spinner from './Spinner.vue';
 
 	export default defineComponent({
 		props: {
@@ -18,18 +19,12 @@
 		},
 		methods: {
 			async populate() {
-				let response: PlaylistResponse = await getUserPlaylists(
-					this.accessToken,
-				);
-				response.items.forEach((item) => {
-					this.playlists.push(item);
-				});
+				let response: PlaylistResponse = await getUserPlaylists();
+				this.playlists = this.playlists.concat(response.items);
 				let next: string | null = response.next;
 				while (next !== null) {
-					response = await getPlaylistsFromHref(this.accessToken, next);
-					response.items.forEach((item) => {
-						this.playlists.push(item);
-					});
+					response = await getPlaylistsFromHref(next);
+					this.playlists = this.playlists.concat(response.items);
 					next = response.next;
 				}
 				this.isLoading = false;
@@ -41,13 +36,12 @@
 		mounted() {
 			this.populate();
 		},
-		components: { PlaylistItem },
+		components: { PlaylistItem, Spinner },
 	});
 </script>
 
 <template>
 	<div class="playlist-wrapper">
-		<div class="spinner" v-if="isLoading"></div>
 		<PlaylistItem
 			v-if="playlists.length > 0"
 			v-for="playlist of playlists"
@@ -55,5 +49,6 @@
 			:playlist="playlist"
 			@playlist-selected="handlePlaylistSelected"
 		/>
+		<Spinner v-if="isLoading" />
 	</div>
 </template>

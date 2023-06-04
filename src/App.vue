@@ -1,17 +1,18 @@
 <script lang="ts">
-	import { defineComponent } from 'vue';
+	import { defineComponent, ref } from 'vue';
 	import { getAuthorizationURL, getAccessToken } from './helpers/authHelper';
 	import { getUserProfile } from './helpers/apiHelper';
 	import PlaylistWrapper from './components/PlaylistWrapper.vue';
 	import TrackList from './components/TrackList.vue';
+	import store from './store';
 
 	export default defineComponent({
 		name: 'App',
 		data() {
 			return {
-				accessToken: '',
 				userProfile: null as UserProfile | null,
 				selectedPlaylist: null as Playlist | null,
+				accessToken: store.getAccessToken(),
 			};
 		},
 		components: {
@@ -27,8 +28,10 @@
 				const urlParams = new URLSearchParams(window.location.search);
 				const code = urlParams.get('code');
 				if (code) {
-					this.accessToken = await getAccessToken(code);
-					this.userProfile = await getUserProfile(this.accessToken);
+					const accessToken = await getAccessToken(code);
+					store.setAccessToken(accessToken);
+					this.accessToken = accessToken;
+					this.userProfile = await getUserProfile();
 					window.history.replaceState(
 						{},
 						document.title,
@@ -58,6 +61,5 @@
 </template>
 
 <style lang="scss">
-	@import '@/assets/spinner.scss';
 	@import '@/assets/styles.scss';
 </style>
