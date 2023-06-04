@@ -34,6 +34,9 @@
 				}
 				this.isLoading = false;
 			},
+			handlePlaylistSelected(playlist: Playlist) {
+				this.$emit('playlist-selected', playlist);
+			},
 		},
 		mounted() {
 			this.populate();
@@ -43,12 +46,14 @@
 </script>
 
 <template>
-	<div class="spinner" v-if="isLoading"></div>
-	<div v-if="playlists.length > 0" class="playlists-wrapper">
+	<div class="playlist-wrapper">
+		<div class="spinner" v-if="isLoading"></div>
 		<PlaylistItem
+			v-if="playlists.length > 0"
 			v-for="playlist of playlists"
 			:key="playlist.id"
 			:playlist="playlist"
+			@playlist-selected="handlePlaylistSelected"
 		/>
 	</div>
 </template>

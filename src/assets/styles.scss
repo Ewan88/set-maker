@@ -6,10 +6,6 @@ body {
 	font-family: sans-serif;
 }
 
-#app {
-	min-height: 100vh;
-}
-
 ::-webkit-scrollbar {
 	width: 10px;
 }
@@ -57,16 +53,22 @@ p {
 	margin-bottom: 25%;
 }
 
-.playlists-wrapper {
+.app-wrapper {
+	min-height: 100vh;
+	display: flex;
+}
+
+.playlist-wrapper {
+	flex: 1;
 	height: calc(100vh - 2em);
-	bottom: 0;
-	left: 0;
 	padding: 1em 0;
+	overflow-y: auto;
 }
 
 .playlist-item-wrapper {
 	display: flex;
 	align-items: center;
+	scroll-behavior: smooth;
 
 	&:hover {
 		background-color: rgb(30, 30, 30);
@@ -76,4 +78,11 @@ p {
 	&:active {
 		background-color: rgb(45, 45, 45);
 	}
+}
+
+.tracklist-wrapper {
+	flex: 2;
+	height: calc(100vh - 2em);
+	padding: 1em;
+	overflow-y: auto;
 }

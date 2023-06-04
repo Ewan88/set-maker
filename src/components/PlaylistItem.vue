@@ -8,11 +8,16 @@
 				required: true,
 			},
 		},
+		methods: {
+			selectPlaylist() {
+				this.$emit('playlist-selected', this.playlist);
+			},
+		},
 	});
 </script>
 
 <template>
-	<div class="playlist-item-wrapper">
+	<div class="playlist-item-wrapper" @click="selectPlaylist">
 		<img
 			v-if="playlist.images.length > 0"
 			:src="playlist.images[playlist.images.length - 1].url"

@@ -2,18 +2,21 @@
 	import { defineComponent } from 'vue';
 	import { getAuthorizationURL, getAccessToken } from './helpers/authHelper';
 	import { getUserProfile } from './helpers/apiHelper';
-	import PlaylistsWrapper from './components/PlaylistsWrapper.vue';
+	import PlaylistWrapper from './components/PlaylistWrapper.vue';
+	import TrackList from './components/TrackList.vue';
 
 	export default defineComponent({
 		name: 'App',
 		data() {
 			return {
 				accessToken: '',
-				userProfile: null as unknown as UserProfile,
+				userProfile: null as UserProfile | null,
+				selectedPlaylist: null as Playlist | null,
 			};
 		},
 		components: {
-			PlaylistsWrapper: PlaylistsWrapper,
+			PlaylistWrapper,
+			TrackList,
 		},
 		methods: {
 			async login() {
@@ -33,6 +36,9 @@
 					);
 				}
 			},
+			handlePlaylistSelected(playlist: Playlist) {
+				this.selectedPlaylist = playlist;
+			},
 		},
 		mounted() {
 			this.handleCallback();
@@ -42,7 +48,13 @@
 
 <template>
 	<button v-if="!accessToken" @click="login()">Login via Spotify</button>
-	<PlaylistsWrapper v-else :access-token="accessToken"></PlaylistsWrapper>
+	<div v-else class="app-wrapper">
+		<PlaylistWrapper
+			:access-token="accessToken"
+			@playlist-selected="handlePlaylistSelected"
+		></PlaylistWrapper>
+		<TrackList v-if="selectedPlaylist" :playlist="selectedPlaylist"></TrackList>
+	</div>
 </template>
 
 <style lang="scss">

@@ -31,3 +31,17 @@ export async function getPlaylistsFromHref(
 
 	return response.data;
 }
+
+export async function getPlaylistTracks(
+	token: string,
+	playlistId: string,
+): Promise<TracksResponse> {
+	const response: AxiosResponse<TracksResponse> = await axios.get(
+		`https://api.spotify.com/v1/playlists/${playlistId}/tracks`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		},
+	);
+
+	return response.data;
+}
