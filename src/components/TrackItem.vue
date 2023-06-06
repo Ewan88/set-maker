@@ -62,8 +62,10 @@
 		flex-direction: column;
 	}
 
-	span {
-		font-size: 0.75em;
+	div {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 
 	.artist-wrapper {
@@ -78,7 +80,6 @@
 
 	.artist-text {
 		margin: none;
-		white-space: nowrap;
 	}
 
 	.artist-text:hover {

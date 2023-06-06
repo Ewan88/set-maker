@@ -36,5 +36,8 @@
 
 	span {
 		font-size: 1em;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 </style>
