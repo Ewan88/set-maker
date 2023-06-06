@@ -83,6 +83,7 @@ p {
 
 	&.selected {
 		background-color: rgb(15, 15, 15);
+		color: rgb(158, 95, 155);
 	}
 }
 
@@ -93,6 +94,23 @@ p {
 	overflow-y: auto;
 }
 
-span {
-	margin: 2px;
+.track-item-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	scroll-behavior: smooth;
+	height: 60px;
+	overflow: hidden;
+
+	&:hover {
+		background-color: rgb(30, 30, 30);
+	}
+
+	&:active {
+		background-color: rgb(45, 45, 45);
+	}
+
+	&.selected {
+		background-color: rgb(15, 15, 15);
+	}
 }

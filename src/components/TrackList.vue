@@ -15,7 +15,6 @@
 			return {
 				tracks: [] as Track[],
 				isLoading: true,
-				hasLoaded: false,
 			};
 		},
 		watch: {

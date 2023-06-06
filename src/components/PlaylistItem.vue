@@ -33,4 +33,8 @@
 		border-radius: 15%;
 		margin: 5px;
 	}
+
+	span {
+		font-size: 1em;
+	}
 </style>
