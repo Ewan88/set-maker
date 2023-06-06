@@ -15,6 +15,7 @@
 			return {
 				playlists: [] as Playlist[],
 				isLoading: true,
+				selectedPlaylist: null as string | null,
 			};
 		},
 		methods: {
@@ -30,7 +31,14 @@
 				this.isLoading = false;
 			},
 			handlePlaylistSelected(playlist: Playlist) {
+				this.selectedPlaylist = playlist.id;
 				this.$emit('playlist-selected', playlist);
+			},
+			isSelected(playlist: Playlist) {
+				return (
+					this.selectedPlaylist !== null &&
+					playlist.id === this.selectedPlaylist
+				);
 			},
 		},
 		mounted() {
@@ -48,6 +56,7 @@
 			:key="playlist.id"
 			:playlist="playlist"
 			@playlist-selected="handlePlaylistSelected"
+			:class="{ selected: isSelected(playlist) }"
 		/>
 		<Spinner v-if="isLoading" />
 	</div>

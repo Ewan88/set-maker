@@ -28,8 +28,8 @@
 
 <style scoped>
 	img {
-		width: 60px;
-		height: 60px;
+		width: 50px;
+		height: 50px;
 		border-radius: 15%;
 		margin: 5px;
 	}

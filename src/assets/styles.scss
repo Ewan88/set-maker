@@ -1,6 +1,6 @@
 body {
 	background-color: black;
-	color: whitesmoke;
+	color: gray;
 	font-size: large;
 	margin: 0;
 	font-family: sans-serif;
@@ -15,7 +15,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: whitesmoke;
+	background: rgb(30, 30, 30);
 }
 
 button {
@@ -69,20 +69,30 @@ p {
 	display: flex;
 	align-items: center;
 	scroll-behavior: smooth;
+	height: 60px;
 
 	&:hover {
 		background-color: rgb(30, 30, 30);
+		color: rgb(178, 115, 175);
 		cursor: pointer;
 	}
 
 	&:active {
 		background-color: rgb(45, 45, 45);
 	}
+
+	&.selected {
+		background-color: rgb(15, 15, 15);
+	}
 }
 
 .tracklist-wrapper {
 	flex: 2;
 	height: calc(100vh - 2em);
-	padding: 1em;
+	padding: 1em 0 1em 1em;
 	overflow-y: auto;
+}
+
+span {
+	margin: 2px;
 }

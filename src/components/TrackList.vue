@@ -2,7 +2,7 @@
 	import { getPlaylistTracks, getTracksFromHref } from '@/helpers/apiHelper';
 	import { defineComponent, type PropType } from 'vue';
 	import Spinner from './Spinner.vue';
-	type Media = Track | Episode;
+	import TrackItem from './TrackItem.vue';
 
 	export default defineComponent({
 		props: {
@@ -13,14 +13,13 @@
 		},
 		data() {
 			return {
-				tracks: [] as Media[],
+				tracks: [] as Track[],
 				isLoading: true,
 				hasLoaded: false,
 			};
 		},
 		watch: {
 			playlist: {
-				//immediate: true,
 				handler() {
 					this.isLoading = true;
 					this.tracks = [];
@@ -33,13 +32,17 @@
 				let response: TracksResponse = await getPlaylistTracks(
 					this.playlist.id,
 				);
-				this.tracks = response.items.map((item) => item.track);
+				this.tracks = response.items
+					.filter((item) => item.track.type == 'track')
+					.map((item) => item.track as Track);
 				let next: string | null = response.next;
 
 				while (next !== null) {
 					response = await getTracksFromHref(next);
 					this.tracks = this.tracks.concat(
-						response.items.map((item) => item.track),
+						response.items
+							.filter((item) => item.track.type == 'track')
+							.map((item) => item.track as Track),
 					);
 					next = response.next;
 				}
@@ -50,17 +53,19 @@
 		mounted() {
 			this.populate();
 		},
-		components: { Spinner },
+		components: { Spinner, TrackItem },
 	});
 </script>
 
 <template>
 	<div class="tracklist-wrapper">
 		<h3>{{ playlist.name }}</h3>
-		<ul v-if="tracks.length > 0">
-			<h3>{{ tracks.length }}</h3>
-			<li v-for="track in tracks">{{ track.name }}</li>
-		</ul>
+		<TrackItem
+			v-if="tracks.length > 0"
+			v-for="track of tracks"
+			:key="track.id"
+			:track="track"
+		/>
 		<Spinner v-if="isLoading" />
 	</div>
 </template>
