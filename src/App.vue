@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { defineComponent, ref } from 'vue';
+	import { defineComponent } from 'vue';
 	import { getAuthorizationURL, getAccessToken } from './helpers/authHelper';
 	import { getUserProfile } from './helpers/apiHelper';
 	import PlaylistWrapper from './components/PlaylistWrapper.vue';

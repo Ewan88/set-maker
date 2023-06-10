@@ -41,7 +41,11 @@
 			<div class="name-wrapper">
 				<div>{{ track.name }}</div>
 				<div class="artist-wrapper">
-					<div v-for="(artist, index) in track.artists" class="artist">
+					<div
+						v-for="(artist, index) in track.artists"
+						class="artist"
+						:key="index"
+					>
 						<div class="artist-text">{{ artist.name }}</div>
 						<div v-if="index !== track.artists.length - 1">,</div>
 					</div>

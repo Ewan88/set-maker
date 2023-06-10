@@ -2,7 +2,7 @@
 	import { defineComponent } from 'vue';
 	import { getUserPlaylists, getPlaylistsFromHref } from '@/helpers/apiHelper';
 	import PlaylistItem from './PlaylistItem.vue';
-	import Spinner from './Spinner.vue';
+	import Spinner from './LoadingSpinner.vue';
 
 	export default defineComponent({
 		props: {
@@ -50,14 +50,15 @@
 
 <template>
 	<div class="playlist-wrapper">
-		<PlaylistItem
-			v-if="playlists.length > 0"
-			v-for="playlist of playlists"
-			:key="playlist.id"
-			:playlist="playlist"
-			@playlist-selected="handlePlaylistSelected"
-			:class="{ selected: isSelected(playlist) }"
-		/>
+		<div v-if="playlists.length > 0">
+			<PlaylistItem
+				v-for="playlist of playlists"
+				:key="playlist.id"
+				:playlist="playlist"
+				@playlist-selected="handlePlaylistSelected"
+				:class="{ selected: isSelected(playlist) }"
+			/>
+		</div>
 		<Spinner v-if="isLoading" />
 	</div>
 </template>

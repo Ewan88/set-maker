@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getPlaylistTracks, getTracksFromHref } from '@/helpers/apiHelper';
 	import { defineComponent, type PropType } from 'vue';
-	import Spinner from './Spinner.vue';
+	import Spinner from './LoadingSpinner.vue';
 	import TrackItem from './TrackItem.vue';
 
 	export default defineComponent({
@@ -59,12 +59,9 @@
 <template>
 	<div class="tracklist-wrapper">
 		<h3>{{ playlist.name }}</h3>
-		<TrackItem
-			v-if="tracks.length > 0"
-			v-for="track of tracks"
-			:key="track.id"
-			:track="track"
-		/>
+		<div v-if="tracks.length > 0">
+			<TrackItem v-for="track of tracks" :key="track.id" :track="track" />
+		</div>
 		<Spinner v-if="isLoading" />
 	</div>
 </template>
