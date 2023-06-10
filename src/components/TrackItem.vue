@@ -26,19 +26,17 @@
 
 <template>
 	<div class="track-item-wrapper">
-		<div class="image-wrapper">
-			<div
-				class="track-image"
-				@mouseenter="isHovering = true"
-				@mouseleave="isHovering = false"
-			>
-				<div class="play-icon" v-if="isHovering">
-					<i class="material-icons">play_arrow</i>
-				</div>
-				<img
-					v-if="track.album.images.length > 0"
-					:src="track.album.images[track.album.images.length - 1].url"
-				/>
+		<div
+			class="image-wrapper"
+			@mouseenter="isHovering = true"
+			@mouseleave="isHovering = false"
+		>
+			<img
+				v-if="track.album.images.length > 0"
+				:src="track.album.images[track.album.images.length - 1].url"
+			/>
+			<div class="play-icon">
+				<i v-if="isHovering" class="material-icons">play_arrow</i>
 			</div>
 			<div class="name-wrapper">
 				<div>{{ track.name }}</div>
@@ -63,27 +61,16 @@
 		align-items: center;
 	}
 
-	.track-image {
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
+	.play-icon {
+		width: 2rem;
+		margin-right: 5px;
+		i.material-icons {
+			color: whitesmoke;
+			font-size: 2rem;
+		}
 
 		&:hover {
 			cursor: pointer;
-		}
-
-		.play-icon {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			z-index: 2;
-
-			i.material-icons {
-				color: whitesmoke;
-				font-size: 2rem;
-			}
 		}
 	}
 
@@ -92,7 +79,6 @@
 		height: 45px;
 		margin: 5px;
 		position: relative;
-		z-index: 1;
 	}
 
 	.name-wrapper {

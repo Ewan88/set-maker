@@ -30,11 +30,11 @@
 	img {
 		width: 50px;
 		height: 50px;
-		border-radius: 15%;
 		margin: 5px;
 	}
 
 	span {
+		margin-left: 1rem;
 		font-size: 1em;
 		white-space: nowrap;
 		overflow: hidden;
