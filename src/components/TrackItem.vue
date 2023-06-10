@@ -91,6 +91,7 @@
 		flex: 1;
 		text-align: center;
 		text-overflow: ellipsis;
+		margin: 0 2rem;
 	}
 
 	.album:hover {

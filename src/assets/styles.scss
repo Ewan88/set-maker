@@ -84,6 +84,15 @@ p {
 	&.selected {
 		background-color: rgb(15, 15, 15);
 		color: rgb(158, 95, 155);
+
+		&:hover {
+			background-color: rgb(30, 30, 30);
+			color: rgb(178, 115, 175);
+		}
+
+		&:active {
+			background-color: rgb(45, 45, 45);
+		}
 	}
 }
 

@@ -41,6 +41,7 @@
 			},
 			handlePlaylistSelected(playlist: Playlist) {
 				this.selectedPlaylist = playlist;
+				this.$router.push({ name: 'Playlist', params: { id: playlist.id } });
 			},
 		},
 		mounted() {
