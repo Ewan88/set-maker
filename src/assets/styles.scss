@@ -16,6 +16,10 @@ body {
 
 ::-webkit-scrollbar-thumb {
 	background: rgb(30, 30, 30);
+
+	&:hover {
+		background: rgb(45, 45, 45);
+	}
 }
 
 button {
